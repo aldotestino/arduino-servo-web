@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { servo } from '../lib/servo';
 
 export function checkServo(req: Request, res: Response, next: NextFunction) {
-  if (!servo.isReady()) {
+  if (!req.servo.isReady()) {
     res.status(500).json({
       ok: false,
       data: {

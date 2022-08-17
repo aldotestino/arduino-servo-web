@@ -6,16 +6,19 @@ import { servoController } from './controllers/servoController';
 import { checkServo } from './middlwares/checkServo';
 import { handleError } from './middlwares/handleError';
 import 'dotenv/config';
-import { servo } from './lib/servo';
+import { ArduinoServo } from './models/ArduinoServo';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       ioSocket: Server,
+      servo: ArduinoServo
     }
   }
 }
+
+const servo = new ArduinoServo(parseInt(process.env.PIN!) || 9);
 
 const app = express();
 const server = http.createServer(app);
@@ -30,6 +33,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use((req, _, next) => {
   req.ioSocket = ioSocket;
+  req.servo = servo;
   next();
 });
 app.use(checkServo);

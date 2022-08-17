@@ -4,7 +4,7 @@ Control a servo motor through a web app
 
 ## Schema
 
-![Schema](./schema.jpg)
+![Schema](./images/schema.jpg)
 
 ## Setting
 
@@ -27,7 +27,18 @@ Control a servo motor through a web app
 ## Usage
 
 * From React App
-* From Command Line
+* From Custom CLI
+  * Get degrees
+    ```sh
+    cd backend
+    yarn cli -g
+    ```
+  * Set degrees
+    ```sh
+    cd backend
+    yarn cli -s <degToSet>
+    ```
+* With curl
   * Get degrees
     ```sh
     curl "http://localhost:3000/"
@@ -39,4 +50,4 @@ Control a servo motor through a web app
 
 ## Screenshots
 
-![Schema](./screenshot.png)
+![Schema](./images/screenshot.png)
