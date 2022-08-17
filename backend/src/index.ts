@@ -7,6 +7,7 @@ import { checkServo } from './middlwares/checkServo';
 import { handleError } from './middlwares/handleError';
 import 'dotenv/config';
 import { ArduinoServo } from './models/ArduinoServo';
+import { recordController } from './controllers/recordController';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -31,13 +32,15 @@ const ioSocket = new Server(server, {
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(express.json());
 app.use((req, _, next) => {
   req.ioSocket = ioSocket;
   req.servo = servo;
   next();
 });
 app.use(checkServo);
-app.use(servoController);
+app.use('/servo', servoController);
+app.use('/record', recordController);
 app.use(handleError);
 
 ioSocket.on('connection', socket => {

@@ -6,13 +6,15 @@ interface ServSliderProps {
   onChangeEnd: (val: number) => void
   defaultValue: number
   deg: number
+  isLocked: boolean
 }
 
-function ServoSlider({ onChange, onChangeEnd, defaultValue, deg }: ServSliderProps) {
+function ServoSlider({ onChange, onChangeEnd, defaultValue, deg, isLocked }: ServSliderProps) {
   const [showTooltip, setShowTooltip] = React.useState(false);
   
   return (
-    <Slider 
+    <Slider
+      isDisabled={isLocked}
       width="sm"
       aria-label='slider' 
       min={0} 

@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { ServoError } from '../models/ArduinoServo';
+import { getRecord } from '../utils/handleRecors';
+import { ServoError } from '../utils/ServoError';
 
 export const servoController = Router();
 
@@ -7,9 +8,23 @@ servoController.get('/', (req, res) => {
   res.json({
     ok: true,
     data: {
-      deg: req.servo.getDeg()
+      deg: req.servo.getDeg(),
+      isLocked: req.servo.isLocked()
     }
   });
+});
+
+servoController.post('/execute/:recordName', async (req, res, next) => {
+  const recordName = req.params.recordName;
+  try {
+    const record = getRecord(recordName);
+    await req.servo.executeRecord(record.movements, record.delay, req.ioSocket);
+    res.json({
+      ok: true
+    });
+  } catch (e: any) {
+    return next(e);
+  }
 });
 
 servoController.post('/:degToSet', (req, res, next) => {

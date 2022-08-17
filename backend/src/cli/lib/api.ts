@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 export async function setDeg(degToSet: number): Promise<number> {
-  const { data: { data, ok } } = await api.post(`${BASE_URL}/${degToSet}`);
+  const { data: { data, ok } } = await api.post(`${BASE_URL}/servo/${degToSet}`);
   if (!ok) {
     throw new Error(data.errorMessage);
   }
@@ -14,7 +14,7 @@ export async function setDeg(degToSet: number): Promise<number> {
 }
 
 export async function getDeg(): Promise<number> {
-  const { data: { data, ok } } = await axios.get(`${BASE_URL}/`);
+  const { data: { data, ok } } = await axios.get(`${BASE_URL}/servo`);
   if (!ok) {
     throw new Error(data.errorMessage);
   }
