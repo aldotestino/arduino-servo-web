@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getRecord } from '../utils/handleRecors';
+import { getRecord } from '../utils/handleRecords';
 import { ServoError } from '../utils/ServoError';
 
 export const servoController = Router();

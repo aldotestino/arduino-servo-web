@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addRecord, deleteRecord, getAllRecords, getRecord } from '../utils/handleRecors';
+import { addRecord, deleteRecord, getAllRecords, getRecord } from '../utils/handleRecords';
 import z from 'zod';
 import { ServoError } from '../utils/ServoError';
 
