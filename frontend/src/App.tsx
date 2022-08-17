@@ -51,7 +51,7 @@ function App() {
   }
 
   return (
-    <VStack h="100vh" px={[2, 2, 5, 10, 20]} py={20} spacing={10}>
+    <VStack minH="100vh" px={[2, 2, 5, 10, 20]} py={20} spacing={10}>
       <Heading>Arduino Servo</Heading>
       {!loading && 
       <>

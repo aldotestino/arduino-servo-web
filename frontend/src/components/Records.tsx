@@ -34,9 +34,7 @@ function Records({ isLocked, currentDeg }: RecordProps) {
   async function saveRecord(name: string, delay: number) {
     console.log({ name, movements, delay });
     const res = await addRecord(name, movements, delay);
-    if(res.ok && recs.length !== 0) {
-      setRecs(prevRecs => [...prevRecs, res.data.name]);
-    }else {
+    if(!res.ok) {
       toast({
         title: 'Error',
         status: 'error',
@@ -45,6 +43,9 @@ function Records({ isLocked, currentDeg }: RecordProps) {
         isClosable: true,
         position: 'top-right'
       });
+      setRecs(prevRecs => [...prevRecs, res.data.name]);
+    }else if(recs.length !== 0) {
+      setRecs(prevRecs => [...prevRecs, res.data.name]);
     }
     setMovements([]);
   }

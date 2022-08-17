@@ -19,6 +19,10 @@ function SaveRecordModal({ isOpen, onClose, onSave, movements }: SaveRecordModal
 
   async function handleOnSave() {
     await onSave(input.name, input.delay);
+    setInput({
+      name: '',
+      delay: 0,
+    });
     onClose();
   }
 
@@ -61,12 +65,12 @@ function SaveRecordModal({ isOpen, onClose, onSave, movements }: SaveRecordModal
 
           <Box mt={4}>
             <FormLabel>Positions</FormLabel>
-            <HStack wrap="wrap">
+            <HStack spacing={2} wrap="wrap">
               {movements.map((pos, i) => 
-                <>
-                  <Text key={i}>{pos}°</Text>
+                <HStack spacing={2} align="center" key={i}>
+                  <Text >{pos}°</Text>
                   {i < movements.length -1 && <Icon as={ArrowRightIcon} w="4" />}
-                </>
+                </HStack>
               )}
             </HStack>
           </Box>
